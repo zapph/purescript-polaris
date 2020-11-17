@@ -1,12 +1,12 @@
 module Polaris.Components.CalloutCard
   (CalloutCardProps, calloutCard, calloutCardRC) where
 
-import Untagged.Union (UndefinedOr)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Polaris.Types (Action)
+import Prelude
 import Effect (Effect)
-import Prelude (Unit, (<<<))
-import Untagged.Coercible (class Coercible, coerce)
+import Polaris.Types (Action)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr)
 
 type CalloutCardProps = { children :: UndefinedOr JSX
                         , illustration :: String

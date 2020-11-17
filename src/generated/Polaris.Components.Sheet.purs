@@ -1,10 +1,10 @@
 module Polaris.Components.Sheet(SheetProps, sheet, sheetRC) where
 
-import React.Basic.Hooks (JSX, element, ReactComponent)
+import Prelude
 import Effect (Effect)
-import Prelude (Unit, (<<<))
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
-import Untagged.Coercible (class Coercible, coerce)
 
 type SheetProps = { children :: JSX
                   , open :: Boolean

@@ -1,12 +1,12 @@
 module Polaris.Components.DataTable
   (DataTableProps, dataTable, dataTableRC) where
 
-import Literals (StringLit)
-import Untagged.Union (type (|+|), UndefinedOr)
-import React.Basic.Hooks (JSX, element, ReactComponent)
+import Prelude
 import Effect.Uncurried (EffectFn2)
-import Prelude (Unit, (<<<))
-import Untagged.Coercible (class Coercible, coerce)
+import Literals (StringLit)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type DataTableProps = { columnContentTypes :: Array
                                               (StringLit

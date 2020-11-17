@@ -1,11 +1,11 @@
 module Polaris.Components.Stack
   (StackProps, stack, stackRC, StackItemProps, stackItem, stackItemRC) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
+import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<))
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type StackProps = { alignment :: UndefinedOr
                                  (StringLit

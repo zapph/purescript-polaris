@@ -18,12 +18,12 @@ module Polaris.Components.Card
   , FunctionComponent
   ) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Literals (StringLit)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<), Unit)
+import Prelude
 import Effect (Effect)
+import Literals (StringLit)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type CardProps = { actions :: UndefinedOr (Array DisableableAction)
                  , children :: UndefinedOr JSX

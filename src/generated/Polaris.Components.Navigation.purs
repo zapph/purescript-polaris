@@ -9,11 +9,11 @@ module Polaris.Components.Navigation
   , sectionType
   ) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import React.Basic.Hooks (JSX, element, ReactComponent)
+import Prelude
 import Effect (Effect)
-import Prelude (Unit, (<<<))
-import Untagged.Coercible (class Coercible, coerce)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type NavigationProps = { children :: UndefinedOr JSX
                        , contextControl :: UndefinedOr JSX

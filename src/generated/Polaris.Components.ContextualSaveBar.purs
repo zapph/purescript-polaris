@@ -8,11 +8,11 @@ module Polaris.Components.ContextualSaveBar
   , contextualSaveBarDiscardActionPropsContextualSaveBarAction
   ) where
 
-import Untagged.Union (UndefinedOr)
-import Untagged.Coercible (class Coercible, coerce)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Prelude ((<<<), Unit)
+import Prelude
 import Effect (Effect)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr)
 
 type ContextualSaveBarProps = { alignContentFlush :: UndefinedOr Boolean
                               , discardAction :: UndefinedOr

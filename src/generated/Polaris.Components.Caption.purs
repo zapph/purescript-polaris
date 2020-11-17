@@ -1,9 +1,9 @@
 module Polaris.Components.Caption(CaptionProps, caption, captionRC) where
 
+import Prelude
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<))
 
 type CaptionProps = { children :: UndefinedOr JSX }
 

@@ -9,12 +9,12 @@ module Polaris.Components.PageActions
   , FunctionComponent
   ) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import Untagged.Coercible (class Coercible, coerce)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Prelude ((<<<), Unit)
-import Literals (StringLit)
+import Prelude
 import Effect (Effect)
+import Literals (StringLit)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type PageActionsProps = { primaryAction :: UndefinedOr
                                            DisableableActionLoadableAction

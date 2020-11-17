@@ -7,13 +7,13 @@ module Polaris.Components.MediaCard
   , FunctionComponent
   ) where
 
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Union (UndefinedOr, type (|+|))
-import Polaris.Types (Action)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<), Unit)
-import Literals (StringLit)
+import Prelude
 import Effect (Effect)
+import Literals (StringLit)
+import Polaris.Types (Action)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type MediaCardProps = { children :: JSX
                       , description :: String

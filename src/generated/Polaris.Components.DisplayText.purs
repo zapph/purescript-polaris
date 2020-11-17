@@ -1,11 +1,11 @@
 module Polaris.Components.DisplayText
   (DisplayTextProps, displayText, displayTextRC) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import React.Basic.Hooks (JSX, element, ReactComponent)
+import Prelude
 import Literals (StringLit)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<))
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type DisplayTextProps = { children :: UndefinedOr JSX
                         , element :: UndefinedOr

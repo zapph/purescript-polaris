@@ -15,11 +15,11 @@ module Polaris.Components.AppProvider
   , TranslationDictionary
   ) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<))
+import Prelude
 import Literals (StringLit)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type AppProviderProps = { apiKey :: UndefinedOr String
                         , children :: UndefinedOr JSX

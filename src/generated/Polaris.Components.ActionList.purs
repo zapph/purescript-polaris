@@ -10,12 +10,12 @@ module Polaris.Components.ActionList
   , OnAction
   ) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import Untagged.Coercible (class Coercible, coerce)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Prelude ((<<<), Unit)
-import Literals (StringLit)
+import Prelude
 import Effect (Effect)
+import Literals (StringLit)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type ActionListProps = { actionRole :: UndefinedOr String
                        , items :: UndefinedOr (Array ActionListItemDescriptor)

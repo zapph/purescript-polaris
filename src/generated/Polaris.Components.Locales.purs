@@ -1,4 +1,4 @@
-module Polaris.Locales
+module Polaris.Components.Locales
   ( cs
   , da
   , de

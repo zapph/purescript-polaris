@@ -1,13 +1,13 @@
 module Polaris.Components.RangeSlider
   (RangeSliderProps, rangeSlider, rangeSliderRC, DualValue) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Polaris.Types (Action)
+import Prelude
 import Effect (Effect)
-import Prelude (Unit, (<<<))
 import Effect.Uncurried (EffectFn2)
-import Untagged.Coercible (class Coercible, coerce)
+import Polaris.Types (Action)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type RangeSliderProps = { disabled :: UndefinedOr Boolean
                         , error :: UndefinedOr

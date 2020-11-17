@@ -1,10 +1,10 @@
 module Polaris.Components.ButtonGroup
   (ButtonGroupProps, buttonGroup, buttonGroupRC) where
 
+import Prelude
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<))
 
 type ButtonGroupProps = { children :: UndefinedOr JSX
                         , connectedTop :: UndefinedOr Boolean

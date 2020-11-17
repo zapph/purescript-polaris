@@ -122,12 +122,12 @@ module Polaris.Components.Page
   , OnAction
   ) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<), Unit)
-import Literals (StringLit)
+import Prelude
 import Effect (Effect)
+import Literals (StringLit)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type PageProps = { actionGroups :: UndefinedOr (Array MenuGroupDescriptor)
                  , additionalNavigation :: UndefinedOr JSX

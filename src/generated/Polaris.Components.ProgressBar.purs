@@ -1,11 +1,11 @@
 module Polaris.Components.ProgressBar
   (ProgressBarProps, progressBar, progressBarRC) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
+import Prelude
 import Literals (StringLit)
-import Untagged.Coercible (class Coercible, coerce)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Prelude ((<<<))
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type ProgressBarProps = { progress :: UndefinedOr Number
                         , size :: UndefinedOr

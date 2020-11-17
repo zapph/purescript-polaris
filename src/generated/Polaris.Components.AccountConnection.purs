@@ -1,11 +1,11 @@
 module Polaris.Components.AccountConnection
   (AccountConnectionProps, accountConnection, accountConnectionRC) where
 
-import Untagged.Union (UndefinedOr)
+import Prelude
 import Polaris.Types (Action)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<))
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr)
 
 type AccountConnectionProps = { accountName :: UndefinedOr String
                               , action :: UndefinedOr Action

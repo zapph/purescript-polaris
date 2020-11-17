@@ -1,10 +1,10 @@
 module Polaris.Components.SkeletonBodyText
   (SkeletonBodyTextProps, skeletonBodyText, skeletonBodyTextRC) where
 
+import Prelude
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
-import Untagged.Coercible (class Coercible, coerce)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Prelude ((<<<))
 
 type SkeletonBodyTextProps = { lines :: UndefinedOr Number }
 

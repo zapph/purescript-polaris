@@ -6,11 +6,11 @@ module Polaris.Components.ResourceItem
   , DisableableAction
   ) where
 
-import Untagged.Union (UndefinedOr)
-import React.Basic.Hooks (JSX, element, ReactComponent)
+import Prelude
 import Effect.Uncurried (EffectFn1)
-import Prelude (Unit, (<<<))
-import Untagged.Coercible (class Coercible, coerce)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr)
 
 type ResourceItemProps = { accessibilityLabel :: UndefinedOr String
                          , name :: UndefinedOr String

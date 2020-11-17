@@ -1,10 +1,10 @@
 module Polaris.Components.Avatar(AvatarProps, avatar, avatarRC) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
+import Prelude
 import Literals (StringLit)
-import Untagged.Coercible (class Coercible, coerce)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Prelude ((<<<))
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type AvatarProps = { accessibilityLabel :: UndefinedOr String
                    , customer :: UndefinedOr Boolean

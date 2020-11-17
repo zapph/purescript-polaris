@@ -1,12 +1,12 @@
 module Polaris.Components.Popover
   (PopoverProps, popover, popoverRC, PopoverCloseSource) where
 
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Union (UndefinedOr, type (|+|))
-import Literals (BooleanLit, StringLit)
+import Prelude
 import Effect.Uncurried (EffectFn1)
-import Prelude (Unit, (<<<))
-import Untagged.Coercible (class Coercible, coerce)
+import Literals (BooleanLit, StringLit)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type PopoverProps = { activator :: JSX
                     , activatorWrapper :: UndefinedOr String

@@ -1,14 +1,14 @@
 module Polaris.Components.TextField
   (TextFieldProps, textField, textFieldRC) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import Literals (StringLit)
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Polaris.Types (Action)
+import Prelude
 import Effect (Effect)
-import Prelude (Unit, (<<<))
-import Effect.Uncurried (EffectFn2, EffectFn1)
-import Untagged.Coercible (class Coercible, coerce)
+import Effect.Uncurried (EffectFn1, EffectFn2)
+import Literals (StringLit)
+import Polaris.Types (Action)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type TextFieldProps = { align :: UndefinedOr
                                  (StringLit

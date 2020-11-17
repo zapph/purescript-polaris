@@ -1,10 +1,10 @@
 module Polaris.Components.InlineError
   (InlineErrorProps, inlineError, inlineErrorRC) where
 
+import Prelude
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (type (|+|))
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<))
 
 type InlineErrorProps = { fieldID :: String
                         , message :: String |+| JSX |+| Array

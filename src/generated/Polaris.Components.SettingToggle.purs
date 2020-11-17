@@ -7,12 +7,12 @@ module Polaris.Components.SettingToggle
   , FunctionComponent
   ) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Untagged.Coercible (class Coercible, coerce)
-import Prelude ((<<<), Unit)
-import Literals (StringLit)
+import Prelude
 import Effect (Effect)
+import Literals (StringLit)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type SettingToggleProps = { action :: UndefinedOr ComplexAction
                           , children :: UndefinedOr JSX

@@ -1,11 +1,11 @@
 module Polaris.Components.Scrollable
   (ScrollableProps, scrollable, scrollableRC) where
 
-import Untagged.Union (UndefinedOr)
-import React.Basic.Hooks (JSX, element, ReactComponent)
+import Prelude
 import Effect (Effect)
-import Prelude (Unit, (<<<))
-import Untagged.Coercible (class Coercible, coerce)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr)
 
 type ScrollableProps = { children :: UndefinedOr JSX
                        , hint :: UndefinedOr Boolean

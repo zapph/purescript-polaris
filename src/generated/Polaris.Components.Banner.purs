@@ -7,13 +7,13 @@ module Polaris.Components.Banner
   , FunctionComponent
   ) where
 
-import Untagged.Union (UndefinedOr, type (|+|))
-import React.Basic.Hooks (JSX, element, ReactComponent)
-import Polaris.Types (Action)
-import Literals (StringLit)
+import Prelude
 import Effect (Effect)
-import Prelude (Unit, (<<<))
-import Untagged.Coercible (class Coercible, coerce)
+import Literals (StringLit)
+import Polaris.Types (Action)
+import React.Basic.Hooks (element, JSX, ReactComponent)
+import Untagged.Coercible (coerce, class Coercible)
+import Untagged.Union (UndefinedOr, type (|+|))
 
 type BannerProps = { action :: UndefinedOr DisableableActionLoadableAction
                    , children :: UndefinedOr JSX
