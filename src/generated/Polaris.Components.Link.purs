@@ -2,8 +2,9 @@ module Polaris.Components.Link(LinkProps, link, linkRC) where
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type LinkProps = { children :: UndefinedOr JSX
@@ -15,7 +16,6 @@ type LinkProps = { children :: UndefinedOr JSX
                  }
 
 link :: forall r . Coercible r LinkProps => r -> JSX
-link = element
-       linkRC <<< coerce
+link = elem linkRC
 
 foreign import linkRC :: ReactComponent LinkProps

@@ -107,7 +107,8 @@ module Polaris.Components.Pagination
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
 
@@ -127,8 +128,7 @@ type PaginationProps = { accessibilityLabel :: UndefinedOr String
                        }
 
 pagination :: forall r . Coercible r PaginationProps => r -> JSX
-pagination = element
-             paginationRC <<< coerce
+pagination = elem paginationRC
 
 foreign import paginationRC :: ReactComponent PaginationProps
 

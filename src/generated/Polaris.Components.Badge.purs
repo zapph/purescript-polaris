@@ -1,9 +1,9 @@
 module Polaris.Components.Badge(BadgeProps, badge, badgeRC) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type BadgeProps = { children :: UndefinedOr String
@@ -27,7 +27,6 @@ type BadgeProps = { children :: UndefinedOr String
                   }
 
 badge :: forall r . Coercible r BadgeProps => r -> JSX
-badge = element
-        badgeRC <<< coerce
+badge = elem badgeRC
 
 foreign import badgeRC :: ReactComponent BadgeProps

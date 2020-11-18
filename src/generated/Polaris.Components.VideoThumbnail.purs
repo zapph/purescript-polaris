@@ -3,8 +3,9 @@ module Polaris.Components.VideoThumbnail
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type VideoThumbnailProps = { accessibilityLabel :: UndefinedOr String
@@ -15,7 +16,6 @@ type VideoThumbnailProps = { accessibilityLabel :: UndefinedOr String
                            }
 
 videoThumbnail :: forall r . Coercible r VideoThumbnailProps => r -> JSX
-videoThumbnail = element
-                 videoThumbnailRC <<< coerce
+videoThumbnail = elem videoThumbnailRC
 
 foreign import videoThumbnailRC :: ReactComponent VideoThumbnailProps

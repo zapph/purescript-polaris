@@ -10,16 +10,15 @@ module Polaris.Components.FormLayout
   , formLayoutItemRC
   ) where
 
-import Prelude
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type FormLayoutProps = { children :: UndefinedOr JSX }
 
 formLayout :: forall r . Coercible r FormLayoutProps => r -> JSX
-formLayout = element
-             formLayoutRC <<< coerce
+formLayout = elem formLayoutRC
 
 foreign import formLayoutRC :: ReactComponent FormLayoutProps
 
@@ -30,15 +29,13 @@ type FormLayoutGroupProps = { children :: UndefinedOr JSX
                             }
 
 formLayoutGroup :: forall r . Coercible r FormLayoutGroupProps => r -> JSX
-formLayoutGroup = element
-                  formLayoutGroupRC <<< coerce
+formLayoutGroup = elem formLayoutGroupRC
 
 foreign import formLayoutGroupRC :: ReactComponent FormLayoutGroupProps
 
 type FormLayoutItemProps = { children :: UndefinedOr JSX }
 
 formLayoutItem :: forall r . Coercible r FormLayoutItemProps => r -> JSX
-formLayoutItem = element
-                 formLayoutItemRC <<< coerce
+formLayoutItem = elem formLayoutItemRC
 
 foreign import formLayoutItemRC :: ReactComponent FormLayoutItemProps

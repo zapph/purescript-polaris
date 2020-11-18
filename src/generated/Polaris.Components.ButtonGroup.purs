@@ -1,9 +1,9 @@
 module Polaris.Components.ButtonGroup
   (ButtonGroupProps, buttonGroup, buttonGroupRC) where
 
-import Prelude
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type ButtonGroupProps = { children :: UndefinedOr JSX
@@ -13,7 +13,6 @@ type ButtonGroupProps = { children :: UndefinedOr JSX
                         }
 
 buttonGroup :: forall r . Coercible r ButtonGroupProps => r -> JSX
-buttonGroup = element
-              buttonGroupRC <<< coerce
+buttonGroup = elem buttonGroupRC
 
 foreign import buttonGroupRC :: ReactComponent ButtonGroupProps

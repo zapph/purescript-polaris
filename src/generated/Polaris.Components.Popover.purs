@@ -4,8 +4,9 @@ module Polaris.Components.Popover
 import Prelude
 import Effect.Uncurried (EffectFn1)
 import Literals (BooleanLit, StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type PopoverProps = { activator :: JSX
@@ -44,8 +45,7 @@ type PopoverProps = { activator :: JSX
                     }
 
 popover :: forall r . Coercible r PopoverProps => r -> JSX
-popover = element
-          popoverRC <<< coerce
+popover = elem popoverRC
 
 foreign import popoverRC :: ReactComponent PopoverProps
 

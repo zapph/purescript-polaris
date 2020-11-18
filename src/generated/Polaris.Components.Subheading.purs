@@ -1,10 +1,10 @@
 module Polaris.Components.Subheading
   (SubheadingProps, subheading, subheadingRC) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type SubheadingProps = { children :: UndefinedOr JSX
@@ -20,7 +20,6 @@ type SubheadingProps = { children :: UndefinedOr JSX
                        }
 
 subheading :: forall r . Coercible r SubheadingProps => r -> JSX
-subheading = element
-             subheadingRC <<< coerce
+subheading = elem subheadingRC
 
 foreign import subheadingRC :: ReactComponent SubheadingProps

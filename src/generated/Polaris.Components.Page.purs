@@ -125,7 +125,8 @@ module Polaris.Components.Page
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -151,8 +152,7 @@ type PageProps = { actionGroups :: UndefinedOr (Array MenuGroupDescriptor)
                  }
 
 page :: forall r . Coercible r PageProps => r -> JSX
-page = element
-       pageRC <<< coerce
+page = elem pageRC
 
 foreign import pageRC :: ReactComponent PageProps
 

@@ -3,8 +3,9 @@ module Polaris.Components.Form(FormProps, form, formRC, FormEvent) where
 import Prelude
 import Effect.Uncurried (EffectFn1)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type FormProps = { acceptCharset :: UndefinedOr String
@@ -35,8 +36,7 @@ type FormProps = { acceptCharset :: UndefinedOr String
                  }
 
 form :: forall r . Coercible r FormProps => r -> JSX
-form = element
-       formRC <<< coerce
+form = elem formRC
 
 foreign import formRC :: ReactComponent FormProps
 

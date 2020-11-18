@@ -3,8 +3,9 @@ module Polaris.Components.Frame
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type FrameProps = { children :: UndefinedOr JSX
@@ -17,8 +18,7 @@ type FrameProps = { children :: UndefinedOr JSX
                   }
 
 frame :: forall r . Coercible r FrameProps => r -> JSX
-frame = element
-        frameRC <<< coerce
+frame = elem frameRC
 
 foreign import frameRC :: ReactComponent FrameProps
 

@@ -5,9 +5,10 @@ import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn3)
 import Literals (StringLit)
+import Polaris.Internal (elem)
 import Polaris.Types (Action)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type DropZoneProps = { accept :: UndefinedOr String
@@ -58,8 +59,7 @@ type DropZoneProps = { accept :: UndefinedOr String
                      }
 
 dropZone :: forall r . Coercible r DropZoneProps => r -> JSX
-dropZone = element
-           dropZoneRC <<< coerce
+dropZone = elem dropZoneRC
 
 foreign import dropZoneRC :: ReactComponent DropZoneProps
 

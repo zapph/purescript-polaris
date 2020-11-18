@@ -2,8 +2,9 @@ module Polaris.Components.Tag(TagProps, tag, tagRC) where
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type TagProps = { children :: UndefinedOr String
@@ -13,7 +14,6 @@ type TagProps = { children :: UndefinedOr String
                 }
 
 tag :: forall r . Coercible r TagProps => r -> JSX
-tag = element
-      tagRC <<< coerce
+tag = elem tagRC
 
 foreign import tagRC :: ReactComponent TagProps

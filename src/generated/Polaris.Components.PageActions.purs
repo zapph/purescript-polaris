@@ -12,7 +12,8 @@ module Polaris.Components.PageActions
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -22,8 +23,7 @@ type PageActionsProps = { primaryAction :: UndefinedOr
                         }
 
 pageActions :: forall r . Coercible r PageActionsProps => r -> JSX
-pageActions = element
-              pageActionsRC <<< coerce
+pageActions = elem pageActionsRC
 
 foreign import pageActionsRC :: ReactComponent PageActionsProps
 

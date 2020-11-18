@@ -2,8 +2,9 @@ module Polaris.Components.Sheet(SheetProps, sheet, sheetRC) where
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type SheetProps = { children :: JSX
@@ -14,7 +15,6 @@ type SheetProps = { children :: JSX
                   }
 
 sheet :: forall r . Coercible r SheetProps => r -> JSX
-sheet = element
-        sheetRC <<< coerce
+sheet = elem sheetRC
 
 foreign import sheetRC :: ReactComponent SheetProps

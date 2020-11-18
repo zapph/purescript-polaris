@@ -11,8 +11,9 @@ module Polaris.Components.DatePicker
 
 import Prelude
 import Effect.Uncurried (EffectFn1, EffectFn2)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type DatePickerProps = { allowRange :: UndefinedOr Boolean
@@ -33,8 +34,7 @@ type DatePickerProps = { allowRange :: UndefinedOr Boolean
                        }
 
 datePicker :: forall r . Coercible r DatePickerProps => r -> JSX
-datePicker = element
-             datePickerRC <<< coerce
+datePicker = elem datePickerRC
 
 foreign import datePickerRC :: ReactComponent DatePickerProps
 

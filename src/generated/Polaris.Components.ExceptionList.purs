@@ -7,17 +7,16 @@ module Polaris.Components.ExceptionList
   , item
   ) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type ExceptionListProps = { items :: Array Item }
 
 exceptionList :: forall r . Coercible r ExceptionListProps => r -> JSX
-exceptionList = element
-                exceptionListRC <<< coerce
+exceptionList = elem exceptionListRC
 
 foreign import exceptionListRC :: ReactComponent ExceptionListProps
 

@@ -1,10 +1,10 @@
 module Polaris.Components.SkeletonDisplayText
   (SkeletonDisplayTextProps, skeletonDisplayText, skeletonDisplayTextRC) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type SkeletonDisplayTextProps = { size :: UndefinedOr
@@ -16,7 +16,6 @@ type SkeletonDisplayTextProps = { size :: UndefinedOr
                                 }
 
 skeletonDisplayText :: forall r . Coercible r SkeletonDisplayTextProps => r -> JSX
-skeletonDisplayText = element
-                      skeletonDisplayTextRC <<< coerce
+skeletonDisplayText = elem skeletonDisplayTextRC
 
 foreign import skeletonDisplayTextRC :: ReactComponent SkeletonDisplayTextProps

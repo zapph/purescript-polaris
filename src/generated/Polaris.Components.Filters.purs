@@ -11,7 +11,8 @@ module Polaris.Components.Filters
 import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -34,8 +35,7 @@ type FiltersProps = { appliedFilters :: UndefinedOr
                     }
 
 filters :: forall r . Coercible r FiltersProps => r -> JSX
-filters = element
-          filtersRC <<< coerce
+filters = elem filtersRC
 
 foreign import filtersRC :: ReactComponent FiltersProps
 

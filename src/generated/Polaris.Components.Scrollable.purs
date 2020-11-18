@@ -3,8 +3,9 @@ module Polaris.Components.Scrollable
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type ScrollableProps = { children :: UndefinedOr JSX
@@ -16,7 +17,6 @@ type ScrollableProps = { children :: UndefinedOr JSX
                        }
 
 scrollable :: forall r . Coercible r ScrollableProps => r -> JSX
-scrollable = element
-             scrollableRC <<< coerce
+scrollable = elem scrollableRC
 
 foreign import scrollableRC :: ReactComponent ScrollableProps

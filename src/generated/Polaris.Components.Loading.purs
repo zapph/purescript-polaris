@@ -1,13 +1,12 @@
 module Polaris.Components.Loading(LoadingProps, loading, loadingRC) where
 
-import Prelude
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 
 type LoadingProps = {}
 
 loading :: forall r . Coercible r LoadingProps => r -> JSX
-loading = element
-          loadingRC <<< coerce
+loading = elem loadingRC
 
 foreign import loadingRC :: ReactComponent LoadingProps

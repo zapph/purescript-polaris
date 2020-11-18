@@ -3,7 +3,8 @@ module Polaris.Components.Tabs
 
 import Prelude
 import Effect.Uncurried (EffectFn1)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
 
@@ -15,8 +16,7 @@ type TabsProps = { children :: UndefinedOr JSX
                  }
 
 tabs :: forall r . Coercible r TabsProps => r -> JSX
-tabs = element
-       tabsRC <<< coerce
+tabs = elem tabsRC
 
 foreign import tabsRC :: ReactComponent TabsProps
 

@@ -4,8 +4,9 @@ module Polaris.Components.RadioButton
 import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn2)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type RadioButtonProps = { ariaDescribedBy :: UndefinedOr String
@@ -27,7 +28,6 @@ type RadioButtonProps = { ariaDescribedBy :: UndefinedOr String
                         }
 
 radioButton :: forall r . Coercible r RadioButtonProps => r -> JSX
-radioButton = element
-              radioButtonRC <<< coerce
+radioButton = elem radioButtonRC
 
 foreign import radioButtonRC :: ReactComponent RadioButtonProps

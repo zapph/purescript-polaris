@@ -11,7 +11,8 @@ module Polaris.Components.Navigation
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -23,8 +24,7 @@ type NavigationProps = { children :: UndefinedOr JSX
                        }
 
 navigation :: forall r . Coercible r NavigationProps => r -> JSX
-navigation = element
-             navigationRC <<< coerce
+navigation = elem navigationRC
 
 foreign import navigationRC :: ReactComponent NavigationProps
 

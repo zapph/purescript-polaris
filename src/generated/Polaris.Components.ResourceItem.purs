@@ -8,8 +8,9 @@ module Polaris.Components.ResourceItem
 
 import Prelude
 import Effect.Uncurried (EffectFn1)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type ResourceItemProps = { accessibilityLabel :: UndefinedOr String
@@ -31,8 +32,7 @@ type ResourceItemProps = { accessibilityLabel :: UndefinedOr String
                          }
 
 resourceItem :: forall r . Coercible r ResourceItemProps => r -> JSX
-resourceItem = element
-               resourceItemRC <<< coerce
+resourceItem = elem resourceItemRC
 
 foreign import resourceItemRC :: ReactComponent ResourceItemProps
 

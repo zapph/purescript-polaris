@@ -4,8 +4,9 @@ import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn2)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type CheckboxProps = { ariaDescribedBy :: UndefinedOr String
@@ -28,7 +29,6 @@ type CheckboxProps = { ariaDescribedBy :: UndefinedOr String
                      }
 
 checkbox :: forall r . Coercible r CheckboxProps => r -> JSX
-checkbox = element
-           checkboxRC <<< coerce
+checkbox = elem checkboxRC
 
 foreign import checkboxRC :: ReactComponent CheckboxProps

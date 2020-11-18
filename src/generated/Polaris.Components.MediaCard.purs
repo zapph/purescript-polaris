@@ -10,8 +10,9 @@ module Polaris.Components.MediaCard
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
+import Polaris.Internal (elem)
 import Polaris.Types (Action)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -27,8 +28,7 @@ type MediaCardProps = { children :: JSX
                       }
 
 mediaCard :: forall r . Coercible r MediaCardProps => r -> JSX
-mediaCard = element
-            mediaCardRC <<< coerce
+mediaCard = elem mediaCardRC
 
 foreign import mediaCardRC :: ReactComponent MediaCardProps
 

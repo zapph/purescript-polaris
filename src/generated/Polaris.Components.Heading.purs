@@ -1,9 +1,9 @@
 module Polaris.Components.Heading(HeadingProps, heading, headingRC) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type HeadingProps = { children :: UndefinedOr JSX
@@ -19,7 +19,6 @@ type HeadingProps = { children :: UndefinedOr JSX
                     }
 
 heading :: forall r . Coercible r HeadingProps => r -> JSX
-heading = element
-          headingRC <<< coerce
+heading = elem headingRC
 
 foreign import headingRC :: ReactComponent HeadingProps

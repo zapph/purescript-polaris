@@ -11,8 +11,9 @@ module Polaris.Components.Select
 import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn2)
+import Polaris.Internal (elem)
 import Polaris.Types (Action)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -38,8 +39,7 @@ type SelectProps = { disabled :: UndefinedOr Boolean
                    }
 
 select :: forall r . Coercible r SelectProps => r -> JSX
-select = element
-         selectRC <<< coerce
+select = elem selectRC
 
 foreign import selectRC :: ReactComponent SelectProps
 

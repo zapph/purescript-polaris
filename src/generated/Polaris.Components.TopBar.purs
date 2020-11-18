@@ -2,8 +2,9 @@ module Polaris.Components.TopBar(TopBarProps, topBar, topBarRC, OnDismiss) where
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type TopBarProps = { contextControl :: UndefinedOr JSX
@@ -19,8 +20,7 @@ type TopBarProps = { contextControl :: UndefinedOr JSX
                    }
 
 topBar :: forall r . Coercible r TopBarProps => r -> JSX
-topBar = element
-         topBarRC <<< coerce
+topBar = elem topBarRC
 
 foreign import topBarRC :: ReactComponent TopBarProps
 

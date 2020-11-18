@@ -9,9 +9,9 @@ module Polaris.Components.ThemeProvider
   , themeProviderThemeConfig
   ) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -20,8 +20,7 @@ type ThemeProviderProps = { children :: UndefinedOr JSX
                           }
 
 themeProvider :: forall r . Coercible r ThemeProviderProps => r -> JSX
-themeProvider = element
-                themeProviderRC <<< coerce
+themeProvider = elem themeProviderRC
 
 foreign import themeProviderRC :: ReactComponent ThemeProviderProps
 

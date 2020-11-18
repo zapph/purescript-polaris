@@ -1,9 +1,9 @@
 module Polaris.Components.Tooltip(TooltipProps, tooltip, tooltipRC) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type TooltipProps = { activatorWrapper :: UndefinedOr String
@@ -19,7 +19,6 @@ type TooltipProps = { activatorWrapper :: UndefinedOr String
                     }
 
 tooltip :: forall r . Coercible r TooltipProps => r -> JSX
-tooltip = element
-          tooltipRC <<< coerce
+tooltip = elem tooltipRC
 
 foreign import tooltipRC :: ReactComponent TooltipProps

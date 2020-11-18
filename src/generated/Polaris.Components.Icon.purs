@@ -1,9 +1,9 @@
 module Polaris.Components.Icon(IconProps, icon, iconRC, ReactSfc) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type IconProps = { accessibilityLabel :: UndefinedOr String
@@ -58,8 +58,7 @@ type IconProps = { accessibilityLabel :: UndefinedOr String
                  }
 
 icon :: forall r . Coercible r IconProps => r -> JSX
-icon = element
-       iconRC <<< coerce
+icon = elem iconRC
 
 foreign import iconRC :: ReactComponent IconProps
 

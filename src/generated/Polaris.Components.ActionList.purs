@@ -13,7 +13,8 @@ module Polaris.Components.ActionList
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -24,8 +25,7 @@ type ActionListProps = { actionRole :: UndefinedOr String
                        }
 
 actionList :: forall r . Coercible r ActionListProps => r -> JSX
-actionList = element
-             actionListRC <<< coerce
+actionList = elem actionListRC
 
 foreign import actionListRC :: ReactComponent ActionListProps
 

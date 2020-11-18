@@ -15,9 +15,9 @@ module Polaris.Components.AppProvider
   , TranslationDictionary
   ) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -33,8 +33,7 @@ type AppProviderProps = { apiKey :: UndefinedOr String
                         }
 
 appProvider :: forall r . Coercible r AppProviderProps => r -> JSX
-appProvider = element
-              appProviderRC <<< coerce
+appProvider = elem appProviderRC
 
 foreign import appProviderRC :: ReactComponent AppProviderProps
 

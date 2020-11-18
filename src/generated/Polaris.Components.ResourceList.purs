@@ -18,7 +18,8 @@ import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3)
 import Foreign (Foreign)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -72,8 +73,7 @@ type ResourceListProps = { alternateTool :: UndefinedOr JSX
                          }
 
 resourceList :: forall r . Coercible r ResourceListProps => r -> JSX
-resourceList = element
-               resourceListRC <<< coerce
+resourceList = elem resourceListRC
 
 foreign import resourceListRC :: ReactComponent ResourceListProps
 

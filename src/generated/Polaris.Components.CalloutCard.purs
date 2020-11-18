@@ -3,9 +3,10 @@ module Polaris.Components.CalloutCard
 
 import Prelude
 import Effect (Effect)
+import Polaris.Internal (elem)
 import Polaris.Types (Action)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type CalloutCardProps = { children :: UndefinedOr JSX
@@ -17,7 +18,6 @@ type CalloutCardProps = { children :: UndefinedOr JSX
                         }
 
 calloutCard :: forall r . Coercible r CalloutCardProps => r -> JSX
-calloutCard = element
-              calloutCardRC <<< coerce
+calloutCard = elem calloutCardRC
 
 foreign import calloutCardRC :: ReactComponent CalloutCardProps

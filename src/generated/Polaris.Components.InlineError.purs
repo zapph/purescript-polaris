@@ -1,9 +1,9 @@
 module Polaris.Components.InlineError
   (InlineErrorProps, inlineError, inlineErrorRC) where
 
-import Prelude
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (type (|+|))
 
 type InlineErrorProps = { fieldID :: String
@@ -12,7 +12,6 @@ type InlineErrorProps = { fieldID :: String
                         }
 
 inlineError :: forall r . Coercible r InlineErrorProps => r -> JSX
-inlineError = element
-              inlineErrorRC <<< coerce
+inlineError = elem inlineErrorRC
 
 foreign import inlineErrorRC :: ReactComponent InlineErrorProps

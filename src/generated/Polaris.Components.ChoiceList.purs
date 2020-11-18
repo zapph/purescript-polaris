@@ -3,7 +3,8 @@ module Polaris.Components.ChoiceList
 
 import Prelude
 import Effect.Uncurried (EffectFn1, EffectFn2)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -26,8 +27,7 @@ type ChoiceListProps = { allowMultiple :: UndefinedOr Boolean
                        }
 
 choiceList :: forall r . Coercible r ChoiceListProps => r -> JSX
-choiceList = element
-             choiceListRC <<< coerce
+choiceList = elem choiceListRC
 
 foreign import choiceListRC :: ReactComponent ChoiceListProps
 

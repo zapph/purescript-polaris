@@ -5,8 +5,9 @@ import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type ResourcePickerProps = { allowMultiple :: UndefinedOr Boolean
@@ -26,8 +27,7 @@ type ResourcePickerProps = { allowMultiple :: UndefinedOr Boolean
                            }
 
 resourcePicker :: forall r . Coercible r ResourcePickerProps => r -> JSX
-resourcePicker = element
-                 resourcePickerRC <<< coerce
+resourcePicker = elem resourcePickerRC
 
 foreign import resourcePickerRC :: ReactComponent ResourcePickerProps
 

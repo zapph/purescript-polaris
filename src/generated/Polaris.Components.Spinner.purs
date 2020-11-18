@@ -1,10 +1,10 @@
 module Polaris.Components.Spinner
   (SpinnerProps, spinner, spinnerRC, NewDesignLanguageColor) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type SpinnerProps = { accessibilityLabel :: UndefinedOr String
@@ -21,8 +21,7 @@ type SpinnerProps = { accessibilityLabel :: UndefinedOr String
                     }
 
 spinner :: forall r . Coercible r SpinnerProps => r -> JSX
-spinner = element
-          spinnerRC <<< coerce
+spinner = elem spinnerRC
 
 foreign import spinnerRC :: ReactComponent SpinnerProps
 

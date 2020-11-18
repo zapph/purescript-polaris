@@ -14,7 +14,8 @@ import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -49,8 +50,7 @@ type ModalProps = { children :: UndefinedOr JSX
                   }
 
 modal :: forall r . Coercible r ModalProps => r -> JSX
-modal = element
-        modalRC <<< coerce
+modal = elem modalRC
 
 foreign import modalRC :: ReactComponent ModalProps
 

@@ -1,14 +1,13 @@
 module Polaris.Components.SectionHeader
   (SectionHeaderProps, sectionHeader, sectionHeaderRC) where
 
-import Prelude
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 
 type SectionHeaderProps = {}
 
 sectionHeader :: forall r . Coercible r SectionHeaderProps => r -> JSX
-sectionHeader = element
-                sectionHeaderRC <<< coerce
+sectionHeader = elem sectionHeaderRC
 
 foreign import sectionHeaderRC :: ReactComponent SectionHeaderProps

@@ -14,7 +14,8 @@ import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -64,8 +65,7 @@ type ButtonProps = { accessibilityLabel :: UndefinedOr String
                    }
 
 button :: forall r . Coercible r ButtonProps => r -> JSX
-button = element
-         buttonRC <<< coerce
+button = elem buttonRC
 
 foreign import buttonRC :: ReactComponent ButtonProps
 

@@ -1,10 +1,10 @@
 module Polaris.Components.EmptyState
   (EmptyStateProps, emptyState, emptyStateRC) where
 
-import Prelude
+import Polaris.Internal (elem)
 import Polaris.Types (Action)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type EmptyStateProps = { action :: UndefinedOr Action
@@ -19,7 +19,6 @@ type EmptyStateProps = { action :: UndefinedOr Action
                        }
 
 emptyState :: forall r . Coercible r EmptyStateProps => r -> JSX
-emptyState = element
-             emptyStateRC <<< coerce
+emptyState = elem emptyStateRC
 
 foreign import emptyStateRC :: ReactComponent EmptyStateProps

@@ -1,10 +1,10 @@
 module Polaris.Components.DisplayText
   (DisplayTextProps, displayText, displayTextRC) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type DisplayTextProps = { children :: UndefinedOr JSX
@@ -26,7 +26,6 @@ type DisplayTextProps = { children :: UndefinedOr JSX
                         }
 
 displayText :: forall r . Coercible r DisplayTextProps => r -> JSX
-displayText = element
-              displayTextRC <<< coerce
+displayText = elem displayTextRC
 
 foreign import displayTextRC :: ReactComponent DisplayTextProps

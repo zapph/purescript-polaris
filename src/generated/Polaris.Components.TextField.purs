@@ -5,9 +5,10 @@ import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2)
 import Literals (StringLit)
+import Polaris.Internal (elem)
 import Polaris.Types (Action)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type TextFieldProps = { align :: UndefinedOr
@@ -75,7 +76,6 @@ type TextFieldProps = { align :: UndefinedOr
                       }
 
 textField :: forall r . Coercible r TextFieldProps => r -> JSX
-textField = element
-            textFieldRC <<< coerce
+textField = elem textFieldRC
 
 foreign import textFieldRC :: ReactComponent TextFieldProps

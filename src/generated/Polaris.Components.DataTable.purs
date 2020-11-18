@@ -4,8 +4,9 @@ module Polaris.Components.DataTable
 import Prelude
 import Effect.Uncurried (EffectFn2)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type DataTableProps = { columnContentTypes :: Array
@@ -49,7 +50,6 @@ type DataTableProps = { columnContentTypes :: Array
                       }
 
 dataTable :: forall r . Coercible r DataTableProps => r -> JSX
-dataTable = element
-            dataTableRC <<< coerce
+dataTable = elem dataTableRC
 
 foreign import dataTableRC :: ReactComponent DataTableProps

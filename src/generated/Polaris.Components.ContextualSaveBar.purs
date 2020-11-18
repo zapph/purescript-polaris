@@ -10,7 +10,8 @@ module Polaris.Components.ContextualSaveBar
 
 import Prelude
 import Effect (Effect)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
 
@@ -23,8 +24,7 @@ type ContextualSaveBarProps = { alignContentFlush :: UndefinedOr Boolean
                               }
 
 contextualSaveBar :: forall r . Coercible r ContextualSaveBarProps => r -> JSX
-contextualSaveBar = element
-                    contextualSaveBarRC <<< coerce
+contextualSaveBar = elem contextualSaveBarRC
 
 foreign import contextualSaveBarRC :: ReactComponent ContextualSaveBarProps
 

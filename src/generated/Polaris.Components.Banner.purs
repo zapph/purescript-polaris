@@ -10,8 +10,9 @@ module Polaris.Components.Banner
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
+import Polaris.Internal (elem)
 import Polaris.Types (Action)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -31,8 +32,7 @@ type BannerProps = { action :: UndefinedOr DisableableActionLoadableAction
                    }
 
 banner :: forall r . Coercible r BannerProps => r -> JSX
-banner = element
-         bannerRC <<< coerce
+banner = elem bannerRC
 
 foreign import bannerRC :: ReactComponent BannerProps
 

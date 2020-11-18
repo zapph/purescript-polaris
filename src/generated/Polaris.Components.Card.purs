@@ -21,7 +21,8 @@ module Polaris.Components.Card
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
@@ -40,8 +41,7 @@ type CardProps = { actions :: UndefinedOr (Array DisableableAction)
                  }
 
 card :: forall r . Coercible r CardProps => r -> JSX
-card = element
-       cardRC <<< coerce
+card = elem cardRC
 
 foreign import cardRC :: ReactComponent CardProps
 
@@ -51,8 +51,7 @@ type CardHeaderProps = { title :: UndefinedOr JSX
                        }
 
 cardHeader :: forall r . Coercible r CardHeaderProps => r -> JSX
-cardHeader = element
-             cardHeaderRC <<< coerce
+cardHeader = elem cardHeaderRC
 
 foreign import cardHeaderRC :: ReactComponent CardHeaderProps
 
@@ -64,16 +63,14 @@ type CardSectionProps = { title :: UndefinedOr JSX
                         }
 
 cardSection :: forall r . Coercible r CardSectionProps => r -> JSX
-cardSection = element
-              cardSectionRC <<< coerce
+cardSection = elem cardSectionRC
 
 foreign import cardSectionRC :: ReactComponent CardSectionProps
 
 type CardSubsectionProps = { children :: UndefinedOr JSX }
 
 cardSubsection :: forall r . Coercible r CardSubsectionProps => r -> JSX
-cardSubsection = element
-                 cardSubsectionRC <<< coerce
+cardSubsection = elem cardSubsectionRC
 
 foreign import cardSubsectionRC :: ReactComponent CardSubsectionProps
 

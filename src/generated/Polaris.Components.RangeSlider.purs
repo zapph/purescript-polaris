@@ -4,9 +4,10 @@ module Polaris.Components.RangeSlider
 import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn2)
+import Polaris.Internal (elem)
 import Polaris.Types (Action)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type RangeSliderProps = { disabled :: UndefinedOr Boolean
@@ -34,8 +35,7 @@ type RangeSliderProps = { disabled :: UndefinedOr Boolean
                         }
 
 rangeSlider :: forall r . Coercible r RangeSliderProps => r -> JSX
-rangeSlider = element
-              rangeSliderRC <<< coerce
+rangeSlider = elem rangeSliderRC
 
 foreign import rangeSliderRC :: ReactComponent RangeSliderProps
 

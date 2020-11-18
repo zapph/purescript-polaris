@@ -3,7 +3,8 @@ module Polaris.Components.ColorPicker
 
 import Prelude
 import Effect.Uncurried (EffectFn1)
-import React.Basic.Hooks (element, JSX, ReactComponent)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
 
@@ -14,8 +15,7 @@ type ColorPickerProps = { allowAlpha :: UndefinedOr Boolean
                         }
 
 colorPicker :: forall r . Coercible r ColorPickerProps => r -> JSX
-colorPicker = element
-              colorPickerRC <<< coerce
+colorPicker = elem colorPickerRC
 
 foreign import colorPickerRC :: ReactComponent ColorPickerProps
 

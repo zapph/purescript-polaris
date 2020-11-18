@@ -1,10 +1,10 @@
 module Polaris.Components.Stack
   (StackProps, stack, stackRC, StackItemProps, stackItem, stackItemRC) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type StackProps = { alignment :: UndefinedOr
@@ -35,8 +35,7 @@ type StackProps = { alignment :: UndefinedOr
                   }
 
 stack :: forall r . Coercible r StackProps => r -> JSX
-stack = element
-        stackRC <<< coerce
+stack = elem stackRC
 
 foreign import stackRC :: ReactComponent StackProps
 
@@ -45,7 +44,6 @@ type StackItemProps = { fill :: UndefinedOr Boolean
                       }
 
 stackItem :: forall r . Coercible r StackItemProps => r -> JSX
-stackItem = element
-            stackItemRC <<< coerce
+stackItem = elem stackItemRC
 
 foreign import stackItemRC :: ReactComponent StackItemProps

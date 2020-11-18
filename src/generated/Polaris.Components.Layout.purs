@@ -10,9 +10,9 @@ module Polaris.Components.Layout
   , layoutSectionRC
   ) where
 
-import Prelude
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type LayoutProps = { children :: UndefinedOr JSX
@@ -20,8 +20,7 @@ type LayoutProps = { children :: UndefinedOr JSX
                    }
 
 layout :: forall r . Coercible r LayoutProps => r -> JSX
-layout = element
-         layoutRC <<< coerce
+layout = elem layoutRC
 
 foreign import layoutRC :: ReactComponent LayoutProps
 
@@ -31,8 +30,7 @@ type LayoutAnnotatedSectionProps = { children :: UndefinedOr JSX
                                    }
 
 layoutAnnotatedSection :: forall r . Coercible r LayoutAnnotatedSectionProps => r -> JSX
-layoutAnnotatedSection = element
-                         layoutAnnotatedSectionRC <<< coerce
+layoutAnnotatedSection = elem layoutAnnotatedSectionRC
 
 foreign import layoutAnnotatedSectionRC :: ReactComponent
                                            LayoutAnnotatedSectionProps
@@ -45,7 +43,6 @@ type LayoutSectionProps = { children :: UndefinedOr JSX
                           }
 
 layoutSection :: forall r . Coercible r LayoutSectionProps => r -> JSX
-layoutSection = element
-                layoutSectionRC <<< coerce
+layoutSection = elem layoutSectionRC
 
 foreign import layoutSectionRC :: ReactComponent LayoutSectionProps

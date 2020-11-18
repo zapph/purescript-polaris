@@ -1,10 +1,10 @@
 module Polaris.Components.ProgressBar
   (ProgressBarProps, progressBar, progressBarRC) where
 
-import Prelude
 import Literals (StringLit)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
 type ProgressBarProps = { progress :: UndefinedOr Number
@@ -16,7 +16,6 @@ type ProgressBarProps = { progress :: UndefinedOr Number
                         }
 
 progressBar :: forall r . Coercible r ProgressBarProps => r -> JSX
-progressBar = element
-              progressBarRC <<< coerce
+progressBar = elem progressBarRC
 
 foreign import progressBarRC :: ReactComponent ProgressBarProps

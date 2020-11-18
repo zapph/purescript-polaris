@@ -1,9 +1,9 @@
 module Polaris.Components.SkeletonPage
   (SkeletonPageProps, skeletonPage, skeletonPageRC) where
 
-import Prelude
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import Polaris.Internal (elem)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type SkeletonPageProps = { breadcrumbs :: UndefinedOr Boolean
@@ -17,7 +17,6 @@ type SkeletonPageProps = { breadcrumbs :: UndefinedOr Boolean
                          }
 
 skeletonPage :: forall r . Coercible r SkeletonPageProps => r -> JSX
-skeletonPage = element
-               skeletonPageRC <<< coerce
+skeletonPage = elem skeletonPageRC
 
 foreign import skeletonPageRC :: ReactComponent SkeletonPageProps

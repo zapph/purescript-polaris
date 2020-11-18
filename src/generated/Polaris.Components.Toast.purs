@@ -2,9 +2,10 @@ module Polaris.Components.Toast(ToastProps, toast, toastRC) where
 
 import Prelude
 import Effect (Effect)
+import Polaris.Internal (elem)
 import Polaris.Types (Action)
-import React.Basic.Hooks (element, JSX, ReactComponent)
-import Untagged.Coercible (coerce, class Coercible)
+import React.Basic.Hooks (JSX, ReactComponent)
+import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
 type ToastProps = { action :: UndefinedOr Action
@@ -15,7 +16,6 @@ type ToastProps = { action :: UndefinedOr Action
                   }
 
 toast :: forall r . Coercible r ToastProps => r -> JSX
-toast = element
-        toastRC <<< coerce
+toast = elem toastRC
 
 foreign import toastRC :: ReactComponent ToastProps
