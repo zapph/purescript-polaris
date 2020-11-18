@@ -1,5 +1,7 @@
 module Polaris.Components.Filters
-  ( FiltersProps
+  ( FiltersBaseProps'
+  , FiltersBaseProps
+  , FiltersProps
   , filters
   , filtersRC
   , AppliedFilterInterface
@@ -11,31 +13,34 @@ module Polaris.Components.Filters
 import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type FiltersProps = { appliedFilters :: UndefinedOr
-                                        (Array
-                                         AppliedFilterInterface)
-                    , children :: UndefinedOr JSX
-                    , disabled :: UndefinedOr Boolean
-                    , filters :: Array FilterInterface
-                    , focused :: UndefinedOr Boolean
-                    , helpText :: UndefinedOr (String |+| JSX)
-                    , hideTags :: UndefinedOr Boolean
-                    , queryPlaceholder :: UndefinedOr String
-                    , queryValue :: UndefinedOr String
-                    , onClearAll :: Effect Unit
-                    , onQueryBlur :: UndefinedOr (Effect Unit)
-                    , onQueryChange :: EffectFn1 String Unit
-                    , onQueryClear :: Effect Unit
-                    , onQueryFocus :: UndefinedOr (Effect Unit)
-                    }
+type FiltersBaseProps' = ( appliedFilters :: UndefinedOr
+                                             (Array
+                                              AppliedFilterInterface)
+                         , disabled :: UndefinedOr Boolean
+                         , filters :: Array FilterInterface
+                         , focused :: UndefinedOr Boolean
+                         , helpText :: UndefinedOr (String |+| JSX)
+                         , hideTags :: UndefinedOr Boolean
+                         , queryPlaceholder :: UndefinedOr String
+                         , queryValue :: UndefinedOr String
+                         , onClearAll :: Effect Unit
+                         , onQueryBlur :: UndefinedOr (Effect Unit)
+                         , onQueryChange :: EffectFn1 String Unit
+                         , onQueryClear :: Effect Unit
+                         , onQueryFocus :: UndefinedOr (Effect Unit)
+                         )
 
-filters :: forall r . Coercible r FiltersProps => r -> JSX
-filters = elem filtersRC
+type FiltersBaseProps = { | FiltersBaseProps' }
+
+type FiltersProps = PropsWithChildren FiltersBaseProps'
+
+filters :: forall r . Coercible r FiltersBaseProps => r -> Array JSX -> JSX
+filters = elemWithChildren filtersRC
 
 foreign import filtersRC :: ReactComponent FiltersProps
 

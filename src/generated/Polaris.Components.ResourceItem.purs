@@ -1,5 +1,7 @@
 module Polaris.Components.ResourceItem
-  ( ResourceItemProps
+  ( ResourceItemBaseProps'
+  , ResourceItemBaseProps
+  , ResourceItemProps
   , resourceItem
   , resourceItemRC
   , Alignment
@@ -8,31 +10,35 @@ module Polaris.Components.ResourceItem
 
 import Prelude
 import Effect.Uncurried (EffectFn1)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
-type ResourceItemProps = { accessibilityLabel :: UndefinedOr String
-                         , name :: UndefinedOr String
-                         , ariaControls :: UndefinedOr String
-                         , ariaExpanded :: UndefinedOr Boolean
-                         , id :: String
-                         , media :: UndefinedOr JSX
-                         , persistActions :: UndefinedOr Boolean
-                         , shortcutActions :: UndefinedOr
-                                              (Array
-                                               DisableableAction)
-                         , sortOrder :: UndefinedOr Number
-                         , url :: UndefinedOr String
-                         , external :: UndefinedOr Boolean
-                         , onClick :: UndefinedOr (EffectFn1 String Unit)
-                         , children :: UndefinedOr JSX
-                         , verticalAlignment :: UndefinedOr Alignment
-                         }
+type ResourceItemBaseProps' = ( accessibilityLabel :: UndefinedOr String
+                              , name :: UndefinedOr String
+                              , ariaControls :: UndefinedOr String
+                              , ariaExpanded :: UndefinedOr Boolean
+                              , id :: String
+                              , media :: UndefinedOr JSX
+                              , persistActions :: UndefinedOr Boolean
+                              , shortcutActions :: UndefinedOr
+                                                   (Array
+                                                    DisableableAction)
+                              , sortOrder :: UndefinedOr Number
+                              , url :: UndefinedOr String
+                              , external :: UndefinedOr Boolean
+                              , onClick :: UndefinedOr (EffectFn1 String Unit)
+                              , verticalAlignment :: UndefinedOr Alignment
+                              )
 
-resourceItem :: forall r . Coercible r ResourceItemProps => r -> JSX
-resourceItem = elem resourceItemRC
+type ResourceItemBaseProps = { | ResourceItemBaseProps' }
+
+type ResourceItemProps = PropsWithChildren ResourceItemBaseProps'
+
+resourceItem :: forall r . Coercible r ResourceItemBaseProps => r -> Array
+                                                                     JSX -> JSX
+resourceItem = elemWithChildren resourceItemRC
 
 foreign import resourceItemRC :: ReactComponent ResourceItemProps
 

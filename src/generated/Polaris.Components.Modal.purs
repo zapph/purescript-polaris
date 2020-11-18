@@ -1,5 +1,7 @@
 module Polaris.Components.Modal
-  ( ModalProps
+  ( ModalBaseProps'
+  , ModalBaseProps
+  , ModalProps
   , modal
   , modalRC
   , AppBridgeAction
@@ -14,43 +16,49 @@ import Prelude
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1)
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type ModalProps = { children :: UndefinedOr JSX
-                  , footer :: UndefinedOr JSX
-                  , iFrameName :: UndefinedOr String
-                  , instant :: UndefinedOr Boolean
-                  , large :: UndefinedOr Boolean
-                  , limitHeight :: UndefinedOr Boolean
-                  , loading :: UndefinedOr Boolean
-                  , message :: UndefinedOr String
-                  , open :: Boolean
-                  , primaryAction :: UndefinedOr
-                                     (AppBridgeAction |+| ComplexAction)
-                  , secondaryActions :: UndefinedOr
-                                        (Array
-                                         AppBridgeAction |+| Array
-                                                             ComplexAction)
-                  , sectioned :: UndefinedOr Boolean
-                  , size :: UndefinedOr
-                            (StringLit
-                             "Small" |+| StringLit
-                                         "Medium" |+| StringLit
-                                                      "Large" |+| StringLit
-                                                                  "Full")
-                  , src :: UndefinedOr String
-                  , title :: UndefinedOr (String |+| JSX)
-                  , onClose :: Effect Unit
-                  , onIFrameLoad :: UndefinedOr (EffectFn1 SyntheticEvent Unit)
-                  , onScrolledToBottom :: UndefinedOr (Effect Unit)
-                  , onTransitionEnd :: UndefinedOr (Effect Unit)
-                  }
+type ModalBaseProps' = ( footer :: UndefinedOr JSX
+                       , iFrameName :: UndefinedOr String
+                       , instant :: UndefinedOr Boolean
+                       , large :: UndefinedOr Boolean
+                       , limitHeight :: UndefinedOr Boolean
+                       , loading :: UndefinedOr Boolean
+                       , message :: UndefinedOr String
+                       , open :: Boolean
+                       , primaryAction :: UndefinedOr
+                                          (AppBridgeAction |+| ComplexAction)
+                       , secondaryActions :: UndefinedOr
+                                             (Array
+                                              AppBridgeAction |+| Array
+                                                                  ComplexAction)
+                       , sectioned :: UndefinedOr Boolean
+                       , size :: UndefinedOr
+                                 (StringLit
+                                  "Small" |+| StringLit
+                                              "Medium" |+| StringLit
+                                                           "Large" |+| StringLit
+                                                                       "Full")
+                       , src :: UndefinedOr String
+                       , title :: UndefinedOr (String |+| JSX)
+                       , onClose :: Effect Unit
+                       , onIFrameLoad :: UndefinedOr
+                                         (EffectFn1
+                                          SyntheticEvent
+                                          Unit)
+                       , onScrolledToBottom :: UndefinedOr (Effect Unit)
+                       , onTransitionEnd :: UndefinedOr (Effect Unit)
+                       )
 
-modal :: forall r . Coercible r ModalProps => r -> JSX
-modal = elem modalRC
+type ModalBaseProps = { | ModalBaseProps' }
+
+type ModalProps = PropsWithChildren ModalBaseProps'
+
+modal :: forall r . Coercible r ModalBaseProps => r -> Array JSX -> JSX
+modal = elemWithChildren modalRC
 
 foreign import modalRC :: ReactComponent ModalProps
 

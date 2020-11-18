@@ -1,19 +1,30 @@
 module Polaris.Components.Collapsible
-  (CollapsibleProps, collapsible, collapsibleRC, Transition, transition) where
+  ( CollapsibleBaseProps'
+  , CollapsibleBaseProps
+  , CollapsibleProps
+  , collapsible
+  , collapsibleRC
+  , Transition
+  , transition
+  ) where
 
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
 
-type CollapsibleProps = { children :: UndefinedOr JSX
-                        , id :: String
-                        , open :: Boolean
-                        , transition :: UndefinedOr Transition
-                        }
+type CollapsibleBaseProps' = ( id :: String
+                             , open :: Boolean
+                             , transition :: UndefinedOr Transition
+                             )
 
-collapsible :: forall r . Coercible r CollapsibleProps => r -> JSX
-collapsible = elem collapsibleRC
+type CollapsibleBaseProps = { | CollapsibleBaseProps' }
+
+type CollapsibleProps = PropsWithChildren CollapsibleBaseProps'
+
+collapsible :: forall r . Coercible r CollapsibleBaseProps => r -> Array
+                                                                   JSX -> JSX
+collapsible = elemWithChildren collapsibleRC
 
 foreign import collapsibleRC :: ReactComponent CollapsibleProps
 

@@ -1,25 +1,34 @@
 module Polaris.Components.Subheading
-  (SubheadingProps, subheading, subheadingRC) where
+  ( SubheadingBaseProps'
+  , SubheadingBaseProps
+  , SubheadingProps
+  , subheading
+  , subheadingRC
+  ) where
 
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type SubheadingProps = { children :: UndefinedOr JSX
-                       , element :: UndefinedOr
-                                    (StringLit
-                                     "h1" |+| StringLit
-                                              "h2" |+| StringLit
-                                                       "h3" |+| StringLit
-                                                                "h4" |+| StringLit
-                                                                         "h5" |+| StringLit
-                                                                                  "h6" |+| StringLit
-                                                                                           "p")
-                       }
+type SubheadingBaseProps' = ( element :: UndefinedOr
+                                         (StringLit
+                                          "h1" |+| StringLit
+                                                   "h2" |+| StringLit
+                                                            "h3" |+| StringLit
+                                                                     "h4" |+| StringLit
+                                                                              "h5" |+| StringLit
+                                                                                       "h6" |+| StringLit
+                                                                                                "p")
+                            )
 
-subheading :: forall r . Coercible r SubheadingProps => r -> JSX
-subheading = elem subheadingRC
+type SubheadingBaseProps = { | SubheadingBaseProps' }
+
+type SubheadingProps = PropsWithChildren SubheadingBaseProps'
+
+subheading :: forall r . Coercible r SubheadingBaseProps => r -> Array
+                                                                 JSX -> JSX
+subheading = elemWithChildren subheadingRC
 
 foreign import subheadingRC :: ReactComponent SubheadingProps

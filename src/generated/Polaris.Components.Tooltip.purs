@@ -1,24 +1,28 @@
-module Polaris.Components.Tooltip(TooltipProps, tooltip, tooltipRC) where
+module Polaris.Components.Tooltip
+  (TooltipBaseProps', TooltipBaseProps, TooltipProps, tooltip, tooltipRC) where
 
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type TooltipProps = { activatorWrapper :: UndefinedOr String
-                    , active :: UndefinedOr Boolean
-                    , children :: UndefinedOr JSX
-                    , content :: String
-                    , light :: UndefinedOr Boolean
-                    , preferredPosition :: UndefinedOr
-                                           (StringLit
-                                            "above" |+| StringLit
-                                                        "below" |+| StringLit
-                                                                    "mostSpace")
-                    }
+type TooltipBaseProps' = ( activatorWrapper :: UndefinedOr String
+                         , active :: UndefinedOr Boolean
+                         , content :: String
+                         , light :: UndefinedOr Boolean
+                         , preferredPosition :: UndefinedOr
+                                                (StringLit
+                                                 "above" |+| StringLit
+                                                             "below" |+| StringLit
+                                                                         "mostSpace")
+                         )
 
-tooltip :: forall r . Coercible r TooltipProps => r -> JSX
-tooltip = elem tooltipRC
+type TooltipBaseProps = { | TooltipBaseProps' }
+
+type TooltipProps = PropsWithChildren TooltipBaseProps'
+
+tooltip :: forall r . Coercible r TooltipBaseProps => r -> Array JSX -> JSX
+tooltip = elemWithChildren tooltipRC
 
 foreign import tooltipRC :: ReactComponent TooltipProps

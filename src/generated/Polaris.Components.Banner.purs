@@ -1,5 +1,7 @@
 module Polaris.Components.Banner
-  ( BannerProps
+  ( BannerBaseProps'
+  , BannerBaseProps
+  , BannerProps
   , banner
   , bannerRC
   , DisableableActionLoadableAction
@@ -10,29 +12,32 @@ module Polaris.Components.Banner
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import Polaris.Types (Action)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type BannerProps = { action :: UndefinedOr DisableableActionLoadableAction
-                   , children :: UndefinedOr JSX
-                   , icon :: UndefinedOr (String |+| FunctionComponent)
-                   , secondaryAction :: UndefinedOr Action
-                   , status :: UndefinedOr
-                               (StringLit
-                                "success" |+| StringLit
-                                              "info" |+| StringLit
-                                                         "warning" |+| StringLit
-                                                                       "critical")
-                   , stopAnnouncements :: UndefinedOr Boolean
-                   , title :: UndefinedOr String
-                   , onDismiss :: UndefinedOr (Effect Unit)
-                   }
+type BannerBaseProps' = ( action :: UndefinedOr DisableableActionLoadableAction
+                        , icon :: UndefinedOr (String |+| FunctionComponent)
+                        , secondaryAction :: UndefinedOr Action
+                        , status :: UndefinedOr
+                                    (StringLit
+                                     "success" |+| StringLit
+                                                   "info" |+| StringLit
+                                                              "warning" |+| StringLit
+                                                                            "critical")
+                        , stopAnnouncements :: UndefinedOr Boolean
+                        , title :: UndefinedOr String
+                        , onDismiss :: UndefinedOr (Effect Unit)
+                        )
 
-banner :: forall r . Coercible r BannerProps => r -> JSX
-banner = elem bannerRC
+type BannerBaseProps = { | BannerBaseProps' }
+
+type BannerProps = PropsWithChildren BannerBaseProps'
+
+banner :: forall r . Coercible r BannerBaseProps => r -> Array JSX -> JSX
+banner = elemWithChildren bannerRC
 
 foreign import bannerRC :: ReactComponent BannerProps
 

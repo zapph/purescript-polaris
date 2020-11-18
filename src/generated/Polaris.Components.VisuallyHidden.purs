@@ -1,14 +1,23 @@
 module Polaris.Components.VisuallyHidden
-  (VisuallyHiddenProps, visuallyHidden, visuallyHiddenRC) where
+  ( VisuallyHiddenBaseProps'
+  , VisuallyHiddenBaseProps
+  , VisuallyHiddenProps
+  , visuallyHidden
+  , visuallyHiddenRC
+  ) where
 
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (class Coercible)
-import Untagged.Union (UndefinedOr)
 
-type VisuallyHiddenProps = { children :: UndefinedOr JSX }
+type VisuallyHiddenBaseProps' = ()
 
-visuallyHidden :: forall r . Coercible r VisuallyHiddenProps => r -> JSX
-visuallyHidden = elem visuallyHiddenRC
+type VisuallyHiddenBaseProps = { | VisuallyHiddenBaseProps' }
+
+type VisuallyHiddenProps = PropsWithChildren VisuallyHiddenBaseProps'
+
+visuallyHidden :: forall r . Coercible r VisuallyHiddenBaseProps => r -> Array
+                                                                         JSX -> JSX
+visuallyHidden = elemWithChildren visuallyHiddenRC
 
 foreign import visuallyHiddenRC :: ReactComponent VisuallyHiddenProps

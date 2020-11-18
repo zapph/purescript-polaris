@@ -1,5 +1,7 @@
 module Polaris.Components.AppProvider
-  ( AppProviderProps
+  ( AppProviderBaseProps'
+  , AppProviderBaseProps
+  , AppProviderProps
   , appProvider
   , appProviderRC
   , Config
@@ -16,24 +18,28 @@ module Polaris.Components.AppProvider
   ) where
 
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type AppProviderProps = { apiKey :: UndefinedOr String
-                        , children :: UndefinedOr JSX
-                        , features :: UndefinedOr FeaturesConfig
-                        , forceRedirect :: UndefinedOr Boolean
-                        , i18n :: TranslationDictionary |+| Array
-                                                            TranslationDictionary
-                        , linkComponent :: UndefinedOr ReactComponentType
-                        , shopOrigin :: UndefinedOr String
-                        , theme :: UndefinedOr ThemeConfig
-                        }
+type AppProviderBaseProps' = ( apiKey :: UndefinedOr String
+                             , features :: UndefinedOr FeaturesConfig
+                             , forceRedirect :: UndefinedOr Boolean
+                             , i18n :: TranslationDictionary |+| Array
+                                                                 TranslationDictionary
+                             , linkComponent :: UndefinedOr ReactComponentType
+                             , shopOrigin :: UndefinedOr String
+                             , theme :: UndefinedOr ThemeConfig
+                             )
 
-appProvider :: forall r . Coercible r AppProviderProps => r -> JSX
-appProvider = elem appProviderRC
+type AppProviderBaseProps = { | AppProviderBaseProps' }
+
+type AppProviderProps = PropsWithChildren AppProviderBaseProps'
+
+appProvider :: forall r . Coercible r AppProviderBaseProps => r -> Array
+                                                                   JSX -> JSX
+appProvider = elemWithChildren appProviderRC
 
 foreign import appProviderRC :: ReactComponent AppProviderProps
 

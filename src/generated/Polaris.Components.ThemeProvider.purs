@@ -1,5 +1,7 @@
 module Polaris.Components.ThemeProvider
-  ( ThemeProviderProps
+  ( ThemeProviderBaseProps'
+  , ThemeProviderBaseProps
+  , ThemeProviderProps
   , themeProvider
   , themeProviderRC
   , Inverse
@@ -10,17 +12,20 @@ module Polaris.Components.ThemeProvider
   ) where
 
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type ThemeProviderProps = { children :: UndefinedOr JSX
-                          , theme :: ThemeProviderThemeConfig
-                          }
+type ThemeProviderBaseProps' = ( theme :: ThemeProviderThemeConfig )
 
-themeProvider :: forall r . Coercible r ThemeProviderProps => r -> JSX
-themeProvider = elem themeProviderRC
+type ThemeProviderBaseProps = { | ThemeProviderBaseProps' }
+
+type ThemeProviderProps = PropsWithChildren ThemeProviderBaseProps'
+
+themeProvider :: forall r . Coercible r ThemeProviderBaseProps => r -> Array
+                                                                       JSX -> JSX
+themeProvider = elemWithChildren themeProviderRC
 
 foreign import themeProviderRC :: ReactComponent ThemeProviderProps
 

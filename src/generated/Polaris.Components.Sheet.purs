@@ -1,20 +1,24 @@
-module Polaris.Components.Sheet(SheetProps, sheet, sheetRC) where
+module Polaris.Components.Sheet
+  (SheetBaseProps', SheetBaseProps, SheetProps, sheet, sheetRC) where
 
 import Prelude
 import Effect (Effect)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
-type SheetProps = { children :: JSX
-                  , open :: Boolean
-                  , onClose :: Effect Unit
-                  , onEntered :: UndefinedOr (Effect Unit)
-                  , onExit :: UndefinedOr (Effect Unit)
-                  }
+type SheetBaseProps' = ( open :: Boolean
+                       , onClose :: Effect Unit
+                       , onEntered :: UndefinedOr (Effect Unit)
+                       , onExit :: UndefinedOr (Effect Unit)
+                       )
 
-sheet :: forall r . Coercible r SheetProps => r -> JSX
-sheet = elem sheetRC
+type SheetBaseProps = { | SheetBaseProps' }
+
+type SheetProps = PropsWithChildren SheetBaseProps'
+
+sheet :: forall r . Coercible r SheetBaseProps => r -> Array JSX -> JSX
+sheet = elemWithChildren sheetRC
 
 foreign import sheetRC :: ReactComponent SheetProps

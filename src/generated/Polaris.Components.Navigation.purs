@@ -1,5 +1,7 @@
 module Polaris.Components.Navigation
-  ( NavigationProps
+  ( NavigationBaseProps'
+  , NavigationBaseProps
+  , NavigationProps
   , navigation
   , navigationRC
   , FunctionComponent
@@ -11,20 +13,24 @@ module Polaris.Components.Navigation
 
 import Prelude
 import Effect (Effect)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type NavigationProps = { children :: UndefinedOr JSX
-                       , contextControl :: UndefinedOr JSX
-                       , location :: String
-                       , sections :: UndefinedOr (Array SectionType)
-                       , onDismiss :: UndefinedOr (Effect Unit)
-                       }
+type NavigationBaseProps' = ( contextControl :: UndefinedOr JSX
+                            , location :: String
+                            , sections :: UndefinedOr (Array SectionType)
+                            , onDismiss :: UndefinedOr (Effect Unit)
+                            )
 
-navigation :: forall r . Coercible r NavigationProps => r -> JSX
-navigation = elem navigationRC
+type NavigationBaseProps = { | NavigationBaseProps' }
+
+type NavigationProps = PropsWithChildren NavigationBaseProps'
+
+navigation :: forall r . Coercible r NavigationBaseProps => r -> Array
+                                                                 JSX -> JSX
+navigation = elemWithChildren navigationRC
 
 foreign import navigationRC :: ReactComponent NavigationProps
 

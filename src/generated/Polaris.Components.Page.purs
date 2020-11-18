@@ -1,5 +1,7 @@
 module Polaris.Components.Page
-  ( PageProps
+  ( PageBaseProps'
+  , PageBaseProps
+  , PageProps
   , page
   , pageRC
   , ActionListItemDescriptor
@@ -125,34 +127,39 @@ module Polaris.Components.Page
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type PageProps = { actionGroups :: UndefinedOr (Array MenuGroupDescriptor)
-                 , additionalNavigation :: UndefinedOr JSX
-                 , breadcrumbs :: UndefinedOr
-                                  (Array
-                                   (CallbackAction |+| LinkAction))
-                 , children :: UndefinedOr JSX
-                 , forceRender :: UndefinedOr Boolean
-                 , fullWidth :: UndefinedOr Boolean
-                 , narrowWidth :: UndefinedOr Boolean
-                 , pagination :: UndefinedOr PaginationDescriptor
-                 , primaryAction :: UndefinedOr PrimaryAction
-                 , secondaryActions :: UndefinedOr (Array MenuActionDescriptor)
-                 , separator :: UndefinedOr Boolean
-                 , singleColumn :: UndefinedOr Boolean
-                 , subtitle :: UndefinedOr String
-                 , thumbnail :: UndefinedOr (JSX |+| ReactSfc)
-                 , title :: UndefinedOr String
-                 , titleHidden :: UndefinedOr Boolean
-                 , titleMetadata :: UndefinedOr JSX
-                 }
+type PageBaseProps' = ( actionGroups :: UndefinedOr (Array MenuGroupDescriptor)
+                      , additionalNavigation :: UndefinedOr JSX
+                      , breadcrumbs :: UndefinedOr
+                                       (Array
+                                        (CallbackAction |+| LinkAction))
+                      , forceRender :: UndefinedOr Boolean
+                      , fullWidth :: UndefinedOr Boolean
+                      , narrowWidth :: UndefinedOr Boolean
+                      , pagination :: UndefinedOr PaginationDescriptor
+                      , primaryAction :: UndefinedOr PrimaryAction
+                      , secondaryActions :: UndefinedOr
+                                            (Array
+                                             MenuActionDescriptor)
+                      , separator :: UndefinedOr Boolean
+                      , singleColumn :: UndefinedOr Boolean
+                      , subtitle :: UndefinedOr String
+                      , thumbnail :: UndefinedOr (JSX |+| ReactSfc)
+                      , title :: UndefinedOr String
+                      , titleHidden :: UndefinedOr Boolean
+                      , titleMetadata :: UndefinedOr JSX
+                      )
 
-page :: forall r . Coercible r PageProps => r -> JSX
-page = elem pageRC
+type PageBaseProps = { | PageBaseProps' }
+
+type PageProps = PropsWithChildren PageBaseProps'
+
+page :: forall r . Coercible r PageBaseProps => r -> Array JSX -> JSX
+page = elemWithChildren pageRC
 
 foreign import pageRC :: ReactComponent PageProps
 

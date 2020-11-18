@@ -1,48 +1,65 @@
 module Polaris.Components.Layout
-  ( LayoutProps
+  ( LayoutBaseProps'
+  , LayoutBaseProps
+  , LayoutProps
   , layout
   , layoutRC
+  , LayoutAnnotatedSectionBaseProps'
+  , LayoutAnnotatedSectionBaseProps
   , LayoutAnnotatedSectionProps
   , layoutAnnotatedSection
   , layoutAnnotatedSectionRC
+  , LayoutSectionBaseProps'
+  , LayoutSectionBaseProps
   , LayoutSectionProps
   , layoutSection
   , layoutSectionRC
   ) where
 
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
-type LayoutProps = { children :: UndefinedOr JSX
-                   , sectioned :: UndefinedOr Boolean
-                   }
+type LayoutBaseProps' = ( sectioned :: UndefinedOr Boolean )
 
-layout :: forall r . Coercible r LayoutProps => r -> JSX
-layout = elem layoutRC
+type LayoutBaseProps = { | LayoutBaseProps' }
+
+type LayoutProps = PropsWithChildren LayoutBaseProps'
+
+layout :: forall r . Coercible r LayoutBaseProps => r -> Array JSX -> JSX
+layout = elemWithChildren layoutRC
 
 foreign import layoutRC :: ReactComponent LayoutProps
 
-type LayoutAnnotatedSectionProps = { children :: UndefinedOr JSX
-                                   , title :: UndefinedOr JSX
-                                   , description :: UndefinedOr JSX
-                                   }
+type LayoutAnnotatedSectionBaseProps' = ( title :: UndefinedOr JSX
+                                        , description :: UndefinedOr JSX
+                                        )
 
-layoutAnnotatedSection :: forall r . Coercible r LayoutAnnotatedSectionProps => r -> JSX
-layoutAnnotatedSection = elem layoutAnnotatedSectionRC
+type LayoutAnnotatedSectionBaseProps = { | LayoutAnnotatedSectionBaseProps' }
+
+type LayoutAnnotatedSectionProps = PropsWithChildren
+                                   LayoutAnnotatedSectionBaseProps'
+
+layoutAnnotatedSection :: forall r . Coercible r LayoutAnnotatedSectionBaseProps => r -> Array
+                                                                                         JSX -> JSX
+layoutAnnotatedSection = elemWithChildren layoutAnnotatedSectionRC
 
 foreign import layoutAnnotatedSectionRC :: ReactComponent
                                            LayoutAnnotatedSectionProps
 
-type LayoutSectionProps = { children :: UndefinedOr JSX
-                          , secondary :: UndefinedOr Boolean
-                          , fullWidth :: UndefinedOr Boolean
-                          , oneHalf :: UndefinedOr Boolean
-                          , oneThird :: UndefinedOr Boolean
-                          }
+type LayoutSectionBaseProps' = ( secondary :: UndefinedOr Boolean
+                               , fullWidth :: UndefinedOr Boolean
+                               , oneHalf :: UndefinedOr Boolean
+                               , oneThird :: UndefinedOr Boolean
+                               )
 
-layoutSection :: forall r . Coercible r LayoutSectionProps => r -> JSX
-layoutSection = elem layoutSectionRC
+type LayoutSectionBaseProps = { | LayoutSectionBaseProps' }
+
+type LayoutSectionProps = PropsWithChildren LayoutSectionBaseProps'
+
+layoutSection :: forall r . Coercible r LayoutSectionBaseProps => r -> Array
+                                                                       JSX -> JSX
+layoutSection = elemWithChildren layoutSectionRC
 
 foreign import layoutSectionRC :: ReactComponent LayoutSectionProps

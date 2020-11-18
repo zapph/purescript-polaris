@@ -1,27 +1,44 @@
 module Polaris.Components.List
-  (ListProps, list, listRC, ListItemProps, listItem, listItemRC) where
+  ( ListBaseProps'
+  , ListBaseProps
+  , ListProps
+  , list
+  , listRC
+  , ListItemBaseProps'
+  , ListItemBaseProps
+  , ListItemProps
+  , listItem
+  , listItemRC
+  ) where
 
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type ListProps = { children :: UndefinedOr JSX
-                 , "type" :: UndefinedOr
-                             (StringLit
-                              "bullet" |+| StringLit
-                                           "number")
-                 }
+type ListBaseProps' = ( "type" :: UndefinedOr
+                                  (StringLit
+                                   "bullet" |+| StringLit
+                                                "number")
+                      )
 
-list :: forall r . Coercible r ListProps => r -> JSX
-list = elem listRC
+type ListBaseProps = { | ListBaseProps' }
+
+type ListProps = PropsWithChildren ListBaseProps'
+
+list :: forall r . Coercible r ListBaseProps => r -> Array JSX -> JSX
+list = elemWithChildren listRC
 
 foreign import listRC :: ReactComponent ListProps
 
-type ListItemProps = { children :: UndefinedOr JSX }
+type ListItemBaseProps' = ()
 
-listItem :: forall r . Coercible r ListItemProps => r -> JSX
-listItem = elem listItemRC
+type ListItemBaseProps = { | ListItemBaseProps' }
+
+type ListItemProps = PropsWithChildren ListItemBaseProps'
+
+listItem :: forall r . Coercible r ListItemBaseProps => r -> Array JSX -> JSX
+listItem = elemWithChildren listItemRC
 
 foreign import listItemRC :: ReactComponent ListItemProps

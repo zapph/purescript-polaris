@@ -1,41 +1,61 @@
 module Polaris.Components.FormLayout
-  ( FormLayoutProps
+  ( FormLayoutBaseProps'
+  , FormLayoutBaseProps
+  , FormLayoutProps
   , formLayout
   , formLayoutRC
+  , FormLayoutGroupBaseProps'
+  , FormLayoutGroupBaseProps
   , FormLayoutGroupProps
   , formLayoutGroup
   , formLayoutGroupRC
+  , FormLayoutItemBaseProps'
+  , FormLayoutItemBaseProps
   , FormLayoutItemProps
   , formLayoutItem
   , formLayoutItemRC
   ) where
 
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (class Coercible)
 import Untagged.Union (UndefinedOr)
 
-type FormLayoutProps = { children :: UndefinedOr JSX }
+type FormLayoutBaseProps' = ()
 
-formLayout :: forall r . Coercible r FormLayoutProps => r -> JSX
-formLayout = elem formLayoutRC
+type FormLayoutBaseProps = { | FormLayoutBaseProps' }
+
+type FormLayoutProps = PropsWithChildren FormLayoutBaseProps'
+
+formLayout :: forall r . Coercible r FormLayoutBaseProps => r -> Array
+                                                                 JSX -> JSX
+formLayout = elemWithChildren formLayoutRC
 
 foreign import formLayoutRC :: ReactComponent FormLayoutProps
 
-type FormLayoutGroupProps = { children :: UndefinedOr JSX
-                            , condensed :: UndefinedOr Boolean
-                            , title :: UndefinedOr String
-                            , helpText :: UndefinedOr JSX
-                            }
+type FormLayoutGroupBaseProps' = ( condensed :: UndefinedOr Boolean
+                                 , title :: UndefinedOr String
+                                 , helpText :: UndefinedOr JSX
+                                 )
 
-formLayoutGroup :: forall r . Coercible r FormLayoutGroupProps => r -> JSX
-formLayoutGroup = elem formLayoutGroupRC
+type FormLayoutGroupBaseProps = { | FormLayoutGroupBaseProps' }
+
+type FormLayoutGroupProps = PropsWithChildren FormLayoutGroupBaseProps'
+
+formLayoutGroup :: forall r . Coercible r FormLayoutGroupBaseProps => r -> Array
+                                                                           JSX -> JSX
+formLayoutGroup = elemWithChildren formLayoutGroupRC
 
 foreign import formLayoutGroupRC :: ReactComponent FormLayoutGroupProps
 
-type FormLayoutItemProps = { children :: UndefinedOr JSX }
+type FormLayoutItemBaseProps' = ()
 
-formLayoutItem :: forall r . Coercible r FormLayoutItemProps => r -> JSX
-formLayoutItem = elem formLayoutItemRC
+type FormLayoutItemBaseProps = { | FormLayoutItemBaseProps' }
+
+type FormLayoutItemProps = PropsWithChildren FormLayoutItemBaseProps'
+
+formLayoutItem :: forall r . Coercible r FormLayoutItemBaseProps => r -> Array
+                                                                         JSX -> JSX
+formLayoutItem = elemWithChildren formLayoutItemRC
 
 foreign import formLayoutItemRC :: ReactComponent FormLayoutItemProps

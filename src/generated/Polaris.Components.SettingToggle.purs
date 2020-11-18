@@ -1,5 +1,7 @@
 module Polaris.Components.SettingToggle
-  ( SettingToggleProps
+  ( SettingToggleBaseProps'
+  , SettingToggleBaseProps
+  , SettingToggleProps
   , settingToggle
   , settingToggleRC
   , ComplexAction
@@ -10,18 +12,22 @@ module Polaris.Components.SettingToggle
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type SettingToggleProps = { action :: UndefinedOr ComplexAction
-                          , children :: UndefinedOr JSX
-                          , enabled :: UndefinedOr Boolean
-                          }
+type SettingToggleBaseProps' = ( action :: UndefinedOr ComplexAction
+                               , enabled :: UndefinedOr Boolean
+                               )
 
-settingToggle :: forall r . Coercible r SettingToggleProps => r -> JSX
-settingToggle = elem settingToggleRC
+type SettingToggleBaseProps = { | SettingToggleBaseProps' }
+
+type SettingToggleProps = PropsWithChildren SettingToggleBaseProps'
+
+settingToggle :: forall r . Coercible r SettingToggleBaseProps => r -> Array
+                                                                       JSX -> JSX
+settingToggle = elemWithChildren settingToggleRC
 
 foreign import settingToggleRC :: ReactComponent SettingToggleProps
 

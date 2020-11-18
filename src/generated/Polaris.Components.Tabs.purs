@@ -1,22 +1,32 @@
 module Polaris.Components.Tabs
-  (TabsProps, tabs, tabsRC, TabDescriptor, tabDescriptor) where
+  ( TabsBaseProps'
+  , TabsBaseProps
+  , TabsProps
+  , tabs
+  , tabsRC
+  , TabDescriptor
+  , tabDescriptor
+  ) where
 
 import Prelude
 import Effect.Uncurried (EffectFn1)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr)
 
-type TabsProps = { children :: UndefinedOr JSX
-                 , fitted :: UndefinedOr Boolean
-                 , selected :: Number
-                 , tabs :: Array TabDescriptor
-                 , onSelect :: UndefinedOr (EffectFn1 Number Unit)
-                 }
+type TabsBaseProps' = ( fitted :: UndefinedOr Boolean
+                      , selected :: Number
+                      , tabs :: Array TabDescriptor
+                      , onSelect :: UndefinedOr (EffectFn1 Number Unit)
+                      )
 
-tabs :: forall r . Coercible r TabsProps => r -> JSX
-tabs = elem tabsRC
+type TabsBaseProps = { | TabsBaseProps' }
+
+type TabsProps = PropsWithChildren TabsBaseProps'
+
+tabs :: forall r . Coercible r TabsBaseProps => r -> Array JSX -> JSX
+tabs = elemWithChildren tabsRC
 
 foreign import tabsRC :: ReactComponent TabsProps
 

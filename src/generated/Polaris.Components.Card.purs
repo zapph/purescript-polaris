@@ -1,13 +1,21 @@
 module Polaris.Components.Card
-  ( CardProps
+  ( CardBaseProps'
+  , CardBaseProps
+  , CardProps
   , card
   , cardRC
+  , CardHeaderBaseProps'
+  , CardHeaderBaseProps
   , CardHeaderProps
   , cardHeader
   , cardHeaderRC
+  , CardSectionBaseProps'
+  , CardSectionBaseProps
   , CardSectionProps
   , cardSection
   , cardSectionRC
+  , CardSubsectionBaseProps'
+  , CardSubsectionBaseProps
   , CardSubsectionProps
   , cardSubsection
   , cardSubsectionRC
@@ -21,56 +29,75 @@ module Polaris.Components.Card
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type CardProps = { actions :: UndefinedOr (Array DisableableAction)
-                 , children :: UndefinedOr JSX
-                 , footerActionAlignment :: UndefinedOr
-                                            (StringLit
-                                             "right" |+| StringLit
-                                                         "left")
-                 , primaryFooterAction :: UndefinedOr ComplexAction
-                 , secondaryFooterActions :: UndefinedOr (Array ComplexAction)
-                 , secondaryFooterActionsDisclosureText :: UndefinedOr String
-                 , sectioned :: UndefinedOr Boolean
-                 , subdued :: UndefinedOr Boolean
-                 , title :: UndefinedOr JSX
-                 }
+type CardBaseProps' = ( actions :: UndefinedOr (Array DisableableAction)
+                      , footerActionAlignment :: UndefinedOr
+                                                 (StringLit
+                                                  "right" |+| StringLit
+                                                              "left")
+                      , primaryFooterAction :: UndefinedOr ComplexAction
+                      , secondaryFooterActions :: UndefinedOr
+                                                  (Array
+                                                   ComplexAction)
+                      , secondaryFooterActionsDisclosureText :: UndefinedOr
+                                                                String
+                      , sectioned :: UndefinedOr Boolean
+                      , subdued :: UndefinedOr Boolean
+                      , title :: UndefinedOr JSX
+                      )
 
-card :: forall r . Coercible r CardProps => r -> JSX
-card = elem cardRC
+type CardBaseProps = { | CardBaseProps' }
+
+type CardProps = PropsWithChildren CardBaseProps'
+
+card :: forall r . Coercible r CardBaseProps => r -> Array JSX -> JSX
+card = elemWithChildren cardRC
 
 foreign import cardRC :: ReactComponent CardProps
 
-type CardHeaderProps = { title :: UndefinedOr JSX
-                       , actions :: UndefinedOr (Array DisableableAction)
-                       , children :: UndefinedOr JSX
-                       }
+type CardHeaderBaseProps' = ( title :: UndefinedOr JSX
+                            , actions :: UndefinedOr (Array DisableableAction)
+                            )
 
-cardHeader :: forall r . Coercible r CardHeaderProps => r -> JSX
-cardHeader = elem cardHeaderRC
+type CardHeaderBaseProps = { | CardHeaderBaseProps' }
+
+type CardHeaderProps = PropsWithChildren CardHeaderBaseProps'
+
+cardHeader :: forall r . Coercible r CardHeaderBaseProps => r -> Array
+                                                                 JSX -> JSX
+cardHeader = elemWithChildren cardHeaderRC
 
 foreign import cardHeaderRC :: ReactComponent CardHeaderProps
 
-type CardSectionProps = { title :: UndefinedOr JSX
-                        , children :: UndefinedOr JSX
-                        , subdued :: UndefinedOr Boolean
-                        , fullWidth :: UndefinedOr Boolean
-                        , actions :: UndefinedOr ComplexAction
-                        }
+type CardSectionBaseProps' = ( title :: UndefinedOr JSX
+                             , subdued :: UndefinedOr Boolean
+                             , fullWidth :: UndefinedOr Boolean
+                             , actions :: UndefinedOr ComplexAction
+                             )
 
-cardSection :: forall r . Coercible r CardSectionProps => r -> JSX
-cardSection = elem cardSectionRC
+type CardSectionBaseProps = { | CardSectionBaseProps' }
+
+type CardSectionProps = PropsWithChildren CardSectionBaseProps'
+
+cardSection :: forall r . Coercible r CardSectionBaseProps => r -> Array
+                                                                   JSX -> JSX
+cardSection = elemWithChildren cardSectionRC
 
 foreign import cardSectionRC :: ReactComponent CardSectionProps
 
-type CardSubsectionProps = { children :: UndefinedOr JSX }
+type CardSubsectionBaseProps' = ()
 
-cardSubsection :: forall r . Coercible r CardSubsectionProps => r -> JSX
-cardSubsection = elem cardSubsectionRC
+type CardSubsectionBaseProps = { | CardSubsectionBaseProps' }
+
+type CardSubsectionProps = PropsWithChildren CardSubsectionBaseProps'
+
+cardSubsection :: forall r . Coercible r CardSubsectionBaseProps => r -> Array
+                                                                         JSX -> JSX
+cardSubsection = elemWithChildren cardSubsectionRC
 
 foreign import cardSubsectionRC :: ReactComponent CardSubsectionProps
 

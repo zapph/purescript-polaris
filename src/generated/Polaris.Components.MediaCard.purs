@@ -1,5 +1,7 @@
 module Polaris.Components.MediaCard
-  ( MediaCardProps
+  ( MediaCardBaseProps'
+  , MediaCardBaseProps
+  , MediaCardProps
   , mediaCard
   , mediaCardRC
   , ActionListItemDescriptor
@@ -10,25 +12,28 @@ module Polaris.Components.MediaCard
 import Prelude
 import Effect (Effect)
 import Literals (StringLit)
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import Polaris.Types (Action)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (coerce, class Coercible)
 import Untagged.Union (UndefinedOr, type (|+|))
 
-type MediaCardProps = { children :: JSX
-                      , description :: String
-                      , popoverActions :: UndefinedOr
-                                          (Array
-                                           ActionListItemDescriptor)
-                      , portrait :: UndefinedOr Boolean
-                      , primaryAction :: Action
-                      , secondaryAction :: UndefinedOr Action
-                      , title :: String
-                      }
+type MediaCardBaseProps' = ( description :: String
+                           , popoverActions :: UndefinedOr
+                                               (Array
+                                                ActionListItemDescriptor)
+                           , portrait :: UndefinedOr Boolean
+                           , primaryAction :: Action
+                           , secondaryAction :: UndefinedOr Action
+                           , title :: String
+                           )
 
-mediaCard :: forall r . Coercible r MediaCardProps => r -> JSX
-mediaCard = elem mediaCardRC
+type MediaCardBaseProps = { | MediaCardBaseProps' }
+
+type MediaCardProps = PropsWithChildren MediaCardBaseProps'
+
+mediaCard :: forall r . Coercible r MediaCardBaseProps => r -> Array JSX -> JSX
+mediaCard = elemWithChildren mediaCardRC
 
 foreign import mediaCardRC :: ReactComponent MediaCardProps
 

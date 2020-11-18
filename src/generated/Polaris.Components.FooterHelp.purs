@@ -1,14 +1,23 @@
 module Polaris.Components.FooterHelp
-  (FooterHelpProps, footerHelp, footerHelpRC) where
+  ( FooterHelpBaseProps'
+  , FooterHelpBaseProps
+  , FooterHelpProps
+  , footerHelp
+  , footerHelpRC
+  ) where
 
-import Polaris.Internal (elem)
+import Polaris.Internal (elemWithChildren, PropsWithChildren)
 import React.Basic.Hooks (JSX, ReactComponent)
 import Untagged.Coercible (class Coercible)
-import Untagged.Union (UndefinedOr)
 
-type FooterHelpProps = { children :: UndefinedOr JSX }
+type FooterHelpBaseProps' = ()
 
-footerHelp :: forall r . Coercible r FooterHelpProps => r -> JSX
-footerHelp = elem footerHelpRC
+type FooterHelpBaseProps = { | FooterHelpBaseProps' }
+
+type FooterHelpProps = PropsWithChildren FooterHelpBaseProps'
+
+footerHelp :: forall r . Coercible r FooterHelpBaseProps => r -> Array
+                                                                 JSX -> JSX
+footerHelp = elemWithChildren footerHelpRC
 
 foreign import footerHelpRC :: ReactComponent FooterHelpProps
